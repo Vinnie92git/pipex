@@ -6,7 +6,7 @@
 #    By: vinni <vinni@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/05/24 21:13:28 by vinni             #+#    #+#              #
-#    Updated: 2023/05/24 21:15:08 by vinni            ###   ########.fr        #
+#    Updated: 2023/05/29 13:51:14 by vinni            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,7 +22,7 @@ NAME = pipex
 INCLUDE = include/
 
 # OBJECTS #
-SRC = child_processes.c main.c
+SRC = child_processes.c main.c error_free.c
 
 SRC_PATH = src/
 SRCS = $(addprefix $(SRC_PATH), $(SRC))
