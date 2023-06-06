@@ -20,20 +20,25 @@ char	*ft_find_path(char **envp)
 	return (*envp + 5);
 }
 
+void	ft_close_pipe(t_process *process)
+{
+	close(process->pipe_fd[0]);
+	close(process->pipe_fd[1]);
+}
+
 int	main(int argc, char **argv, char **envp)
 {
 	t_process	process;
 
-	if (argc < 5)
-		return (ft_error_message("Invalid number of arguments\n"));
+	if (argc != 5)
+		return (ft_put_error("Invalid number of arguments", 0));
 	process.infile_fd = open(argv[1], O_RDONLY);
 	if (process.infile_fd < 0)
-		ft_error(argv[1]);
+		return (ft_put_error(strerror(errno), argv[1]));
 	process.outfile_fd = open(argv[4], O_TRUNC | O_CREAT | O_RDWR, 0644);
 	if (process.outfile_fd < 0)
-		ft_error(argv[4]);
-	if (pipe(process.pipe_fd))
-		ft_error("Pipe");
+		return (ft_put_error(strerror(errno), argv[4]));
+	pipe(process.pipe_fd);
 	process.envp_path = ft_find_path(envp);
 	process.cmd_paths = ft_split(process.envp_path, ':');
 	process.pid_1 = fork();
