@@ -19,6 +19,7 @@
 # include <sys/stat.h>
 # include <unistd.h>
 # include <errno.h>
+# include <string.h>
 # include <fcntl.h>
 # include <stdio.h>
 
@@ -39,10 +40,10 @@ void	ft_first_command(t_process process, char **argv, char **envp);
 void	ft_second_command(t_process process, char **argv, char **envp);
 void	ft_free_child(t_process *process);
 void	ft_free_parent(t_process *process);
-void	ft_error(char *str);
 void	ft_close_pipe(t_process *process);
 
 int		ft_error_message(char *message);
+int		ft_put_error(char *s, char *t);
 
 char	*ft_find_path(char **envp);
 char	*ft_get_command(char **paths, char *command_name);
