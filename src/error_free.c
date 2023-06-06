@@ -42,20 +42,27 @@ void	ft_free_parent(t_process *process)
 	free(process->cmd_paths);
 }
 
-void	ft_close_pipe(t_process *process)
-{
-	close(process->pipe_fd[0]);
-	close(process->pipe_fd[1]);
-}
-
-void	ft_error(char *str)
-{
-	perror(str);
-	exit(1);
-}
-
 int	ft_error_message(char *message)
 {
 	write(2, message, ft_strlen(message));
 	return (1);
+}
+
+int	ft_put_error(char *s, char *t)
+{
+	if (!s)
+		return (2);
+	if (t)
+	{
+		write(2, "-bash: ", 7);
+		write(2, t, ft_strlen(t));
+		write(2, ": ", 2);
+	}
+	while (*s)
+	{
+		write(2, &(*s), 1);
+		s++;
+	}
+	write(2, "\n", 1);
+	return (2);
 }
